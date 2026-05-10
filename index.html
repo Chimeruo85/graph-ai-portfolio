@@ -172,6 +172,34 @@
             max-width: 800px;
         }
 
+        /* Avatar Styling */
+        .avatar-container {
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-color);
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+            background-color: var(--surface-color);
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            z-index: -1;
+        }
+
         .hero-tag {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -545,6 +573,12 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
+                <!-- Avatar Added Here -->
+                <div class="avatar-container">
+                    <div class="avatar-glow"></div>
+                    <img src="https://raw.githubusercontent.com/Chimeruo85/graph-ai-portfolio/main/1000270839.jpg" alt="Chimeruo Ugochi Egbo" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Chimeruo+Egbo&background=16a34a&color=fff&size=150'">
+                </div>
+                
                 <div class="hero-tag">Portfolio & Course Journal</div>
                 <h1>Hi, I'm <span class="gradient-text">Chimeruo Ugochi Egbo</span></h1>
                 <p>A Detail-oriented Business Analyst bridging the gap between vast datasets and actionable intelligence. Currently exploring the frontiers of Generative AI for Work & Research.</p>
