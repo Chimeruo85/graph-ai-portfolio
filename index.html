@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chimeruo Ugochi Egbo | AI & Business Analytics Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-color: #060913;
+            --surface-color: rgba(255, 255, 255, 0.03);
+            --surface-hover: rgba(255, 255, 255, 0.07);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --gradient-1: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+            --gradient-2: linear-gradient(135deg, #a3e635 0%, #22c55e 100%);
+            --gradient-3: linear-gradient(135deg, #2dd4bf 0%, #059669 100%);
+            --font-main: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Abstract Background Elements */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -200px;
+            left: -200px;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .bg-glow-2 {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(22, 163, 74, 0.1) 0%, rgba(0,0,0,0) 70%);
+            bottom: 20%;
+            right: -300px;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(6, 9, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Sections General */
+        section {
+            padding: 8rem 0 4rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .gradient-text-2 {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .gradient-text-3 {
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 6rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4ade80;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .skills-container {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .skills-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #4ade80;
+            color: #4ade80;
+        }
+
+        /* Course Modules Section */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .module-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-2);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            background: var(--surface-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .module-card:hover::before {
+            opacity: 1;
+        }
+
+        .module-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #34d399;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .module-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .module-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .module-topics {
+            list-style: none;
+        }
+
+        .module-topics li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .module-topics li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+        }
+
+        /* Submissions Section */
+        .submissions-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .submission-card {
+            display: flex;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            align-items: center;
+        }
+
+        .submission-card:hover {
+            background: var(--surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .submission-week {
+            flex: 0 0 120px;
+            text-align: center;
+            padding-right: 2rem;
+            border-right: 1px solid var(--border-color);
+            margin-right: 2rem;
+        }
+
+        .submission-week h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .submission-week span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submission-content {
+            flex: 1;
+        }
+
+        .submission-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .submission-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .submission-link {
+            display: inline-flex;
+            align-items: center;
+            color: #22c55e;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .submission-link:hover {
+            color: #86efac;
+        }
+
+        .submission-link svg {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .submission-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-completed {
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .status-pending {
+            background: rgba(148, 163, 184, 0.1);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-info a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .submission-card { flex-direction: column; text-align: center; }
+            .submission-week { border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; margin-right: 0; padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simplified for mobile, could add hamburger */
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .btn-outline { margin-left: 0; margin-top: 1rem; display: block; text-align: center; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Decorative Background -->
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">C. EGBO</a>
+            <div class="nav-links">
+                <a href="#about">About Me</a>
+                <a href="#course">The Course</a>
+                <a href="#submissions">My Submissions</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">Portfolio & Course Journal</div>
+                <h1>Hi, I'm <span class="gradient-text">Chimeruo Ugochi Egbo</span></h1>
+                <p>A Detail-oriented Business Analyst bridging the gap between vast datasets and actionable intelligence. Currently exploring the frontiers of Generative AI for Work & Research.</p>
+                <div>
+                    <a href="#submissions" class="btn btn-primary">View My Work</a>
+                    <a href="#about" class="btn btn-outline">More About Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About <span class="gradient-text-2">Me</span></h2>
+                <p class="section-subtitle">Transforming complex data into clear, concise, and professional insights for over 13 years.</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Based in Abuja, Nigeria, I serve as a Business Analyst specializing in Insights & Business Intelligence at the National Health Insurance Authority (NHIA). My expertise lies in creating, reviewing, and optimizing business documents, analytical reports, and compelling presentations.</p>
+                    <p>I have a proven track record of developing Excel-based reports and Power BI dashboards to analyze performance metrics. Recently, my focus has shifted toward integrating AI-assisted workflows (like ChatGPT and Copilot) to enhance productivity and standard reporting quality in fast-paced environments.</p>
+                    <p><strong>Education:</strong><br>
+                    • Master of Health Administration | IICSE University, USA<br>
+                    • BSc Computer Science | Nnamdi Azikiwe University</p>
+                </div>
+                
+                <div class="skills-container">
+                    <h3 class="skills-title">Core Competencies & Tools</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Business Analysis</span>
+                        <span class="skill-tag">Data Validation</span>
+                        <span class="skill-tag">KPI Development</span>
+                        <span class="skill-tag">Advanced Excel</span>
+                        <span class="skill-tag">Power BI & Tableau</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Python & R</span>
+                        <span class="skill-tag">Generative AI Workflows</span>
+                        <span class="skill-tag">Process Improvement</span>
+                        <span class="skill-tag">JIRA & Asana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About The Course Section -->
+    <section id="course">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The <span class="gradient-text">Course</span></h2>
+                <p class="section-subtitle">Generative AI for Work & Research by The GRAPH Courses: An 8-week cohort mastering no-code AI tools for responsible task automation.</p>
+            </div>
+
+            <div class="modules-grid">
+                <!-- Module 1 -->
+                <div class="module-card">
+                    <div class="module-number">Module 1</div>
+                    <h3 class="module-title">Websites, Documents & Presentations</h3>
+                    <p class="module-desc">Generating text responsibly for papers, creating project websites with no-code tools, and formatting documents using AI.</p>
+                    <ul class="module-topics">
+                        <li>LLM architectures & Markdown</li>
+                        <li>Building sites with Canvas & Replit</li>
+                        <li>AI presentation tools</li>
+                    </ul>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="module-card">
+                    <div class="module-number">Module 2</div>
+                    <h3 class="module-title">AI-Automated Data Analysis</h3>
+                    <p class="module-desc">Mastering AI tools responsibly for analyzing data, manipulating files, and creating ethical automated reports.</p>
+                    <ul class="module-topics">
+                        <li>ChatGPT Code Interpreter</li>
+                        <li>Processing datasets with Julius</li>
+                        <li>Automated dashboards via TheBricks</li>
+                    </ul>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="module-card">
+                    <div class="module-number">Module 3</div>
+                    <h3 class="module-title">GenAI for Research & Text Analysis</h3>
+                    <p class="module-desc">Accelerating information gathering, identifying patterns, and organizing complex text information responsibly.</p>
+                    <ul class="module-topics">
+                        <li>Literature reviews with Elicit</li>
+                        <li>Sentiment analysis & trend tracking</li>
+                        <li>Automated summarization workflows</li>
+                    </ul>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="module-card">
+                    <div class="module-number">Module 4</div>
+                    <h3 class="module-title">Custom GPTs and Chatbots</h3>
+                    <p class="module-desc">Building chatbots for research assistance, knowledge management, and task support via RAG systems.</p>
+                    <ul class="module-topics">
+                        <li>LLM context windows & RAG</li>
+                        <li>Building custom GPTs</li>
+                        <li>Interactive bots with Botpress</li>
+                    </ul>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="module-card">
+                    <div class="module-number">Module 5</div>
+                    <h3 class="module-title">AI for Task Automation</h3>
+                    <p class="module-desc">Practical strategies for automating repetitive research tasks and orchestrating app-to-app workflows.</p>
+                    <ul class="module-topics">
+                        <li>AI agent-based systems</li>
+                        <li>Email response automations</li>
+                        <li>Browser control agents</li>
+                    </ul>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="module-card">
+                    <div class="module-number">Module 6</div>
+                    <h3 class="module-title">GenAI for Communication</h3>
+                    <p class="module-desc">Designing accurate visuals, video abstracts, and explanatory content to disseminate research findings.</p>
+                    <ul class="module-topics">
+                        <li>Scientific figures & diagrams</li>
+                        <li>AI-generated video abstracts</li>
+                        <li>Prompt engineering for visualization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submissions Section -->
+    <section id="submissions">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Weekly <span class="gradient-text-3">Submissions</span></h2>
+                <p class="section-subtitle">A chronological record of my projects, experiments, and implementations throughout the cohort.</p>
+            </div>
+
+            <div class="submissions-timeline">
+                
+                <!-- Week 1 -->
+                <div class="submission-card">
+                    <div class="submission-week">
+                        <span>Week</span>
+                        <h3>01</h3>
+                    </div>
+                    <div class="submission-content">
+                        <div class="status-badge status-completed">Completed</div>
+                        <h4>Personal AI Portfolio Site</h4>
+                        <p>Leveraging Markdown, HTML, and AI assistants (ChatGPT Canvas) to structure and deploy a responsive, elegant research and professional portfolio.</p>
+                        <a href="#" class="submission-link">View Submission Artifact <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Week 2 -->
+                <div class="submission-card">
+                    <div class="submission-week">
+                        <span>Week</span>
+                        <h3>02</h3>
+                    </div>
+                    <div class="submission-content">
+                        <div class="status-badge status-pending">Pending</div>
+                        <h4>Automated Health Claims Dashboard</h4>
+                        <p>Utilizing ChatGPT Code Interpreter and Julius to process dummy health utilization datasets, resulting in automated visualizations and insights.</p>
+                        <a href="#" class="submission-link">Coming Soon <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="submission-card">
+                    <div class="submission-week">
+                        <span>Week</span>
+                        <h3>03</h3>
+                    </div>
+                    <div class="submission-content">
+                        <div class="status-badge status-pending">Pending</div>
+                        <h4>Literature Review Synthesis</h4>
+                        <p>Implementing LiteRev and Elicit to systematically evaluate and map contemporary research papers on public health administration and AI implementation.</p>
+                        <a href="#" class="submission-link">Coming Soon <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Capstone Placeholder -->
+                <div class="submission-card" style="border-color: rgba(5, 150, 105, 0.5);">
+                    <div class="submission-week">
+                        <span>Week</span>
+                        <h3 style="color: #059669;">08</h3>
+                    </div>
+                    <div class="submission-content">
+                        <div class="status-badge status-pending">Capstone Goal</div>
+                        <h4>Final Automation Project Showcase</h4>
+                        <p>A comprehensive demonstration combining data analysis, RAG-based knowledge management, and automated reporting tailored for Business Intelligence at scale.</p>
+                        <a href="#" class="submission-link" style="color: #059669;">Track Progress <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <h2>Chimeruo Ugochi Egbo</h2>
+            <p>Business Analyst - Insights & Business Intelligence | Abuja, Nigeria</p>
+            <div class="contact-info">
+                <a href="#">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    +234 809 823 7452
+                </a>
+                <a href="#">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn Profile
+                </a>
+            </div>
+            <p style="font-size: 0.85rem; margin-top: 2rem; opacity: 0.5;">
+                &copy; 2024 Chimeruo Ugochi Egbo. Built for The GRAPH Courses.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
