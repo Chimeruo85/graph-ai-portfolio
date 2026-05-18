@@ -1,0 +1,158 @@
+---
+title: "GDP per capita and life expectancy in 2020"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 9,
+  fig.height = 5,
+  dpi = 120
+)
+library(ggplot2)
+library(maps)
+library(scales)
+```
+
+This report uses Gapminder-style country panels for **GDP per capita** (`gdp_pcap.csv`) and **life expectancy at birth** (`lex.csv`), restricted to **2020**.
+
+## Data structure
+
+```{r peek}
+gdp_raw <- read.csv("../gdp_pcap.csv", check.names = FALSE, stringsAsFactors = FALSE)
+lex_raw <- read.csv("../lex.csv", check.names = FALSE, stringsAsFactors = FALSE)
+yr <- "2020"
+gdp_sample <- gdp_raw[seq_len(min(5, nrow(gdp_raw))), c("geo", "name", "1800", "1950", "2000", yr)]
+lex_sample <- lex_raw[seq_len(min(5, nrow(lex_raw))), c("geo", "name", "1800", "1950", "2000", yr)]
+```
+
+Each file is in **wide** form: `geo` (3-letter code), `name`, and one column per year. The tables below show the first five countries and a few year columns.
+
+```{r show-samples, results="asis"}
+cat("**Sample: GDP per capita** (first rows, selected years)\n\n")
+knitr::kable(gdp_sample)
+cat("\n\n**Sample: Life expectancy** (first rows, selected years)\n\n")
+knitr::kable(lex_sample)
+```
+
+## 2020 subset
+
+```{r subset-2020}
+gdp_2020 <- data.frame(
+  geo = toupper(gdp_raw[["geo"]]),
+  name = gdp_raw[["name"]],
+  gdp_pcap = suppressWarnings(as.numeric(gdp_raw[[yr]])),
+  stringsAsFactors = FALSE
+)
+lex_2020 <- data.frame(
+  geo = toupper(lex_raw[["geo"]]),
+  life_exp = suppressWarnings(as.numeric(lex_raw[[yr]])),
+  stringsAsFactors = FALSE
+)
+
+combined_2020 <- merge(gdp_2020, lex_2020, by = "geo", all = FALSE)
+combined_2020 <- combined_2020[
+  !is.na(combined_2020$gdp_pcap) & !is.na(combined_2020$life_exp),
+]
+n_countries <- nrow(combined_2020)
+```
+
+After dropping rows with missing 2020 values for either indicator, the analysis uses `r n_countries` countries with both GDP per capita and life expectancy in 2020.
+
+## World maps (2020)
+
+Country values are matched to map polygons via `maps::iso3166` (ISO alpha-3 to map region name) and `ggplot2::map_data("world")`. Unmatched or missing countries appear in light grey.
+
+```{r world-maps}
+iso <- data.frame(
+  geo = iso3166[["a3"]],
+  map_region = iso3166[["mapname"]],
+  stringsAsFactors = FALSE
+)
+
+gdp_map <- merge(iso, gdp_2020[, c("geo", "gdp_pcap")], by = "geo", all.x = FALSE)
+lex_map <- merge(iso, lex_2020, by = "geo", all.x = FALSE)
+
+world <- map_data("world")
+
+map_gdp_df <- merge(world, gdp_map, by.x = "region", by.y = "map_region", all.x = TRUE)
+map_lex_df <- merge(world, lex_map, by.x = "region", by.y = "map_region", all.x = TRUE)
+
+map_gdp_plot <- ggplot(map_gdp_df, aes(x = long, y = lat, group = group, fill = gdp_pcap)) +
+  geom_polygon(color = NA) +
+  coord_fixed(1.3) +
+  scale_y_continuous(limits = c(-60, 90), expand = c(0, 0)) +
+  scale_fill_viridis_c(
+    option = "plasma",
+    trans = "log10",
+    na.value = "grey90",
+    labels = label_number(scale_cut = cut_long_scale()),
+    name = "GDP per capita\n(constant intl. $, log scale)"
+  ) +
+  theme_void(base_size = 12) +
+  theme(legend.position = "right") +
+  labs(title = "GDP per capita, 2020", subtitle = "World map (Natural Earth via maps); missing = grey")
+
+map_lex_plot <- ggplot(map_lex_df, aes(x = long, y = lat, group = group, fill = life_exp)) +
+  geom_polygon(color = NA) +
+  coord_fixed(1.3) +
+  scale_y_continuous(limits = c(-60, 90), expand = c(0, 0)) +
+  scale_fill_viridis_c(
+    option = "cividis",
+    na.value = "grey90",
+    name = "Life expectancy\n(years at birth)"
+  ) +
+  theme_void(base_size = 12) +
+  theme(legend.position = "right") +
+  labs(title = "Life expectancy at birth, 2020", subtitle = "World map (Natural Earth via maps); missing = grey")
+
+map_gdp_plot
+map_lex_plot
+```
+
+## Relationship in 2020
+
+```{r scatter}
+cor_gdp_lex <- cor(combined_2020$gdp_pcap, combined_2020$life_exp, method = "pearson")
+
+scatter_plot <- ggplot(combined_2020, aes(x = gdp_pcap, y = life_exp)) +
+  geom_point(alpha = 0.65, size = 2, color = "#2C7FB8") +
+  geom_smooth(method = "lm", se = TRUE, color = "#253494", linewidth = 0.6) +
+  scale_x_log10(labels = label_number(scale_cut = cut_long_scale())) +
+  labs(
+    title = "GDP per capita vs life expectancy, 2020",
+    x = "GDP per capita (log10 scale, constant international $)",
+    y = "Life expectancy at birth (years)"
+  ) +
+  theme_minimal(base_size = 12)
+
+scatter_plot
+```
+
+Pearson correlation (on raw GDP values): **`r round(cor_gdp_lex, 3)`**.
+
+```{r summary-table, results="asis"}
+sum_tbl <- data.frame(
+  n = nrow(combined_2020),
+  median_gdp = median(combined_2020$gdp_pcap),
+  median_lex = median(combined_2020$life_exp),
+  min_gdp = min(combined_2020$gdp_pcap),
+  max_gdp = max(combined_2020$gdp_pcap),
+  min_lex = min(combined_2020$life_exp),
+  max_lex = max(combined_2020$life_exp)
+)
+cat("**Summary of paired 2020 observations**\n\n")
+knitr::kable(sum_tbl, digits = 1)
+```
+
+## Interpretation
+
+In 2020, **higher GDP per capita is associated with higher life expectancy** across countries: the cloud of points slopes upward, especially on a log scale for income, and the fitted line on the log scale is clearly positive. Richer countries cluster toward the top-right; many low-income countries have lower life expectancy, though there is **meaningful dispersion** (public health, inequality, institutions, and recent shocks all move countries off a simple income–longevity line).
+
+## Reflection 
+Interacting with cursor was easy. I entered the prompts I needed to create the report with the dataset. The result is amazing and so much time was saved using this tool.
