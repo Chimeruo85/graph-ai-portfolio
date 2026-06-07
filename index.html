@@ -111,9 +111,8 @@
         .status-completed { background: rgba(52, 211, 153, 0.1); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
         .status-pending { background: rgba(148, 163, 184, 0.1); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2); }
         
-        /* Contact Section */
-        .form-wrapper { display: flex; justify-content: center; align-items: center; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; max-width: 720px; margin: 0 auto; backdrop-filter: blur(10px); }
-        .form-wrapper iframe { max-width: 100%; border-radius: 8px; background-color: #fff; }
+        /* Contact Section Specific */
+        .form-container { display: flex; justify-content: center; width: 100%; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; overflow: hidden; }
 
         /* Footer */
         footer { border-top: 1px solid var(--border-color); padding: 3rem 0; text-align: center; color: var(--text-secondary); margin-top: 4rem; }
@@ -135,8 +134,8 @@
             .hero h1 { font-size: 2.5rem; } 
             .hero p { font-size: 1.1rem; } 
             .btn-outline { margin-left: 0; margin-top: 1rem; display: block; text-align: center; } 
-            .section-title { font-size: 2rem; }
-            .form-wrapper { padding: 1rem; border-radius: 8px; } 
+            .section-title { font-size: 2rem; } 
+            .form-container { padding: 1rem 0; }
         }
     </style>
 </head>
@@ -357,11 +356,10 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Contact for <span class="gradient-text">Consultation</span></h2>
-                <p class="section-subtitle">Interested in collaborating or need analytical insights? Fill out the form below to get in touch.</p>
+                <p class="section-subtitle">Reach out to discuss business analysis, insights, or custom AI workflow implementations.</p>
             </div>
-            
-            <div class="form-wrapper">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScxCAoCRuszKK5S_-yUsAANEi8mOXhXxNPW_FgeMF-DtbrXSQ/viewform?embedded=true" width="640" height="777" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <div class="form-container">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScxCAoCRuszKK5S_-yUsAANEi8mOXhXxNPW_FgeMF-DtbrXSQ/viewform?embedded=true" width="640" height="777" frameborder="0" marginheight="0" marginwidth="0" style="max-width: 100%;">Loading…</iframe>
             </div>
         </div>
     </section>
